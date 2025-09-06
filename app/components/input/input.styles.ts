@@ -23,8 +23,6 @@ export const useLoginStyle = (colors: Colors) => ({
     input: {
         ...typography.body2,
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
     }
 
 })
