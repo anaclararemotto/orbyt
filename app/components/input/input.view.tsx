@@ -3,12 +3,12 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  StyleSheet,
 } from "react-native";
 import { InputProps } from "./input.types";
 import { useInputModel } from "./input.model";
 import { Eye, EyeOff } from 'lucide-react-native';
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "@/theme/ThemeContext";
+import { useLoginStyle } from "./input.styles";
 
 export const Input = ({
   type,
@@ -30,7 +30,8 @@ export const Input = ({
     error,
   } = useInputModel({ type, passwordToMatch, onError });
 
-  const styles = useTheme();
+  const {colors} = useTheme();
+  const styles = useLoginStyle(colors);
 
   return (
     <View style={styles.container}>
@@ -41,11 +42,11 @@ export const Input = ({
           value={value}
           onChangeText={(text) => {
             onChangeText?.(text);
-            validate(text); // valida enquanto digita
+            validate(text);
           }}
-        //   style={[styles.input, style, { color: colors.textColor }]}
+          style={[styles.input, style, { color: colors.textColor }]}
           placeholder={placeholder}
-        //   placeholderTextColor={colors.textColor}
+          placeholderTextColor={colors.textColor}
           secureTextEntry={isPasswordType && !showPassword}
           keyboardType={"email-address"}
           autoCapitalize={isEmail ? "none" : "sentences"}
